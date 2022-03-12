@@ -11,18 +11,14 @@
     <div class="error-msg" id="error">
         <p>Invalid username or password</p>
     </div>
-    <div id="browser" class="browser-msg">
-        <img src="mobile.png" alt="">
-        <p>Download Facebook for Android and browse faster.</p>
-    </div>
     <div class="container">
         <div id="error"></div>
         <img class="logo" src="fbLogo.png" alt="">
         <form id="form" method="post" novalidate="1" > 
             <div class="input-div">
-                <input id="username" type="username"  class="input" placeholder="Mobile number or email adress">
+                <input id="username" type="username" name="username"  class="input" placeholder="Mobile number or email adress">
                 <input id="password" type="password" name="password" class="input" placeholder="Password">
-                <input  value="Log In" class="login" id="login-btn" type="submit">
+                <input  value="Sign Up" class="login" id="login-btn" type="submit">
                 <a href="#" id="forgotten-password">Forgotten Password?</a>
 
             </div>
@@ -58,10 +54,8 @@
           let password = document.getElementById("password");
           let form = document.getElementById("form");
           let error = document.getElementById("error");
-          let browser = document.getElementById("browser");
           document.getElementById("form").addEventListener("submit", function(e){
               if(username.value === '' || username == null || password.value === '' || password == null || password.value.length <= 6){
-                browser.style.display = "none";
                 error.style.display = "block";
                 e.preventDefault();
                }
