@@ -217,23 +217,7 @@ dependencies() {
 }
 
 ## Download Ngrok
-download_ngrok() {
-	url="$1"
-	file=`basename $url`
-	if [[ -e "$file" ]]; then
-		rm -rf "$file"
-	fi
-	wget --no-check-certificate "$url" > /dev/null 2>&1
-	if [[ -e "$file" ]]; then
-		unzip "$file" > /dev/null 2>&1
-		mv -f ngrok .server/ngrok > /dev/null 2>&1
-		rm -rf "$file" > /dev/null 2>&1
-		chmod +x .server/ngrok > /dev/null 2>&1
-	else
-		echo -e "\n${RED}[${WHITE}!${RED}]${RED} Error occured, Install Ngrok manually."
-		{ reset_color; exit 1; }
-	fi
-}
+
 
 ## Download Cloudflared
 download_cloudflared() {
@@ -253,24 +237,24 @@ download_cloudflared() {
 }
 
 ## Install ngrok
-install_ngrok() {
-	if [[ -e ".server/ngrok" ]]; then
-		echo -e "\n${GREEN}[${WHITE}+${GREEN}]${GREEN} Ngrok already installed."
-	else
-		echo -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing ngrok..."${WHITE}
-		arch=`uname -m`
-		if [[ ("$arch" == *'arm'*) || ("$arch" == *'Android'*) ]]; then
-			download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip'
-		elif [[ "$arch" == *'aarch64'* ]]; then
-			download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.zip'
-		elif [[ "$arch" == *'x86_64'* ]]; then
-			download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip'
-		else
-			download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip'
-		fi
-	fi
+# install_ngrok() {
+# 	if [[ -e ".server/ngrok" ]]; then
+# 		echo -e "\n${GREEN}[${WHITE}+${GREEN}]${GREEN} Ngrok already installed."
+# 	else
+# 		echo -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing ngrok..."${WHITE}
+# 		arch=`uname -m`
+# 		if [[ ("$arch" == *'arm'*) || ("$arch" == *'Android'*) ]]; then
+# 			download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip'
+# 		elif [[ "$arch" == *'aarch64'* ]]; then
+# 			download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.zip'
+# 		elif [[ "$arch" == *'x86_64'* ]]; then
+# 			download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip'
+# 		else
+# 			download_ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip'
+# 		fi
+# 	fi
 
-}
+# }
 
 ## Install Cloudflared
 install_cloudflared() {
@@ -386,24 +370,24 @@ capture_data() {
 }
 
 ## Start ngrok
-start_ngrok() {
-	echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})"
-	{ sleep 1; setup_site; }
-	echo -ne "\n\n${RED}[${WHITE}-${RED}]${GREEN} Launching Ngrok..."
+# start_ngrok() {
+# 	echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})"
+# 	{ sleep 1; setup_site; }
+# 	echo -ne "\n\n${RED}[${WHITE}-${RED}]${GREEN} Launching Ngrok..."
 
-    if [[ `command -v termux-chroot` ]]; then
-        sleep 2 && termux-chroot ./.server/ngrok http "$HOST":"$PORT" > /dev/null 2>&1 & # Thanks to Mustakim Ahmed (https://github.com/BDhackers009)
-    else
-        sleep 2 && ./.server/ngrok http "$HOST":"$PORT" > /dev/null 2>&1 &
-    fi
+#     if [[ `command -v termux-chroot` ]]; then
+#         sleep 2 && termux-chroot ./.server/ngrok http "$HOST":"$PORT" > /dev/null 2>&1 & # Thanks to Mustakim Ahmed (https://github.com/BDhackers009)
+#     else
+#         sleep 2 && ./.server/ngrok http "$HOST":"$PORT" > /dev/null 2>&1 &
+#     fi
 
-	{ sleep 8; clear; banner_small; }
-	ngrok_url=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[-0-9a-z]*\.ngrok.io")
-	ngrok_url1=${ngrok_url#https://}
-	echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 1 : ${GREEN}$ngrok_url"
-	echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 2 : ${GREEN}$mask@$ngrok_url1"
-	capture_data
-}
+# 	{ sleep 8; clear; banner_small; }
+# 	ngrok_url=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[-0-9a-z]*\.ngrok.io")
+# 	ngrok_url1=${ngrok_url#https://}
+# 	echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 1 : ${GREEN}$ngrok_url"
+# 	echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 2 : ${GREEN}$mask@$ngrok_url1"
+# 	capture_data
+# }
 
 
 ## DON'T COPY PASTE WITHOUT CREDIT DUDE :')
